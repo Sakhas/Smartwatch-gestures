@@ -13,6 +13,7 @@ window.onload = function () {
     textbox.addEventListener("click", function(){
     	box = document.querySelector('#textbox');
     	box.innerHTML = box.innerHTML == "Basic" ? "Sample" : "Basic";
+    	
     });
     
 };

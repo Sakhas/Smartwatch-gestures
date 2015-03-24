@@ -1,4 +1,4 @@
-
+//testing testing
 window.onload = function () {
     // TODO:: Do your initialization job
 
@@ -14,6 +14,8 @@ window.onload = function () {
     	box = document.querySelector('#button1');
     
     });
+    
+   var persereika = 0;
     
     var accValueX = document.querySelector('#accValueX');
     var accValueY = document.querySelector('#accValueY');

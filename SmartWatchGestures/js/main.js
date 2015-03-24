@@ -11,9 +11,22 @@ window.onload = function () {
     // Sample code
     var textbox = document.querySelector('.contents');
     textbox.addEventListener("click", function(){
-    	box = document.querySelector('#textbox');
-    	box.innerHTML = box.innerHTML == "Basic" ? "Sample" : "Basic";
-    	
+    	box = document.querySelector('#button1');
+    
+    });
+    
+    var accValueX = document.querySelector('#accValueX');
+    var accValueY = document.querySelector('#accValueY');
+    var accValueZ = document.querySelector('#accValueZ');
+    
+    window.addEventListener('devicemotion', function(e) {
+        var ax = e.accelerationIncludingGravity.x;
+        var ay = -e.accelerationIncludingGravity.y;
+        var az = -e.accelerationIncludingGravity.z;
+        accValueX.innerHTML =  'X : ' +  ax;
+        accValueY.innerHTML = 'Y : ' + ay;
+        accValueZ.innerHTML = 'Z : ' + az;
+ 
     });
     
 };

@@ -4,7 +4,7 @@
 
 body {
     margin: 0px auto;
-    background-color:green;
+    background-color:white;
 }
 
 .contents {
@@ -18,6 +18,12 @@ body {
 
 .content_text {
 	font-weight:bold;
-	font-size:5em;
+	font-size:10em;
+	color:#fff;
+}
+
+button{
+	font-weight:bold;
+	font-size:2.5em;
 	color:#fff;
 }

@@ -15,6 +15,8 @@ window.onload = function () {
     
     });
     
+    //dslakdla
+    
     var accValueX = document.querySelector('#accValueX');
     var accValueY = document.querySelector('#accValueY');
     var accValueZ = document.querySelector('#accValueZ');
@@ -23,9 +25,9 @@ window.onload = function () {
         var ax = e.accelerationIncludingGravity.x;
         var ay = -e.accelerationIncludingGravity.y;
         var az = -e.accelerationIncludingGravity.z;
-        accValueX.innerHTML =  'X : ' +  ax;
-        accValueY.innerHTML = 'Y : ' + ay;
-        accValueZ.innerHTML = 'Z : ' + az;
+        accValueX.innerHTML = ax;
+        accValueY.innerHTML = ay;
+        accValueZ.innerHTML = az;
  
     });
     

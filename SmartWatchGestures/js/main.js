@@ -19,6 +19,7 @@ window.onload = function () {
     
     });
     
+    
     //dslakdla
     
     var accValueX = document.querySelector('#accValueX');

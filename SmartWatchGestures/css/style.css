@@ -24,7 +24,11 @@ body {
 
 button{
 	font-weight:bold;
-	font-size:2.5em;
-	color:#fff;
+	font-size:2.1em;
+	color:White;
+	background-color:#404040;
 	width:100%;
+	z-index:1;
 }
+
+

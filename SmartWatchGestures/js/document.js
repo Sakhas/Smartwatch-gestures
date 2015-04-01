@@ -6,19 +6,11 @@ window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if(e.keyName == "back")
-            tizen.application.getCurrentApplication().exit();
+        	window.location.href = "index.html";;
     });
 
     screen.lockOrientation("portrait");
-    
-    // Sample code
-    var textbox = document.querySelector('.contents');
-    textbox.addEventListener("click", function(){
-    	box = document.querySelector('#button1');
-    	
-    });
-    
-    //dslakdla
+    //tizen.power.request("SCREEN", "SCREEN_NORMAL");
     
     var accValueX = document.querySelector('#accValueX');
     var accValueY = document.querySelector('#accValueY');
@@ -42,29 +34,29 @@ window.onload = function () {
         ay = Math.floor(-e.accelerationIncludingGravity.y);
         az = Math.floor(-e.accelerationIncludingGravity.z);
                 
-        if(ay > 1 && ay < 3){
+        if(ay > 1 && ay < 3 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 4;
         	window.scrollTo(0, newScrollPoint);
         	
         }
-        if(ay < -3 && ay > -6){
+        if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 4;
         	window.scrollTo(0, newScrollPoint);
         	
         }
-        if(ay > 2 && ay < 5){
+        if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 9;
         	window.scrollTo(0, newScrollPoint);
         }
-        if(ay < -5 && ay > -8){
+        if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 9;
         	window.scrollTo(0, newScrollPoint);
         }
-        if(ay > 4){
+        if(ay > 4 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 20;
         	window.scrollTo(0, newScrollPoint);
         }
-        if(ay < -7){
+        if(ay < -7&& ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 20;
         	window.scrollTo(0, newScrollPoint);
         }

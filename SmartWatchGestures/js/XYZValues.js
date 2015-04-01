@@ -6,7 +6,7 @@ window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if(e.keyName == "back")
-            tizen.application.getCurrentApplication().exit();
+        	 window.location.href = "index.html";
     });
 
     screen.lockOrientation("portrait");

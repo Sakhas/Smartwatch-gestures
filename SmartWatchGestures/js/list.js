@@ -6,10 +6,11 @@ window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if(e.keyName == "back")
-            tizen.application.getCurrentApplication().exit();
+           window.location.href = "index.html";
     });
 
     screen.lockOrientation("portrait");
+    //tizen.power.request("SCREEN", "SCREEN_NORMAL");
     
     /*var listObjects = document.getElementById("listObjects");
     var tableBody = document.createElement("TBODY");
@@ -38,7 +39,7 @@ window.onload = function () {
     var az;
     var newScrollPoint;
     var oldHighlighted = null;
-    var selectionDialogVisible = 0;
+
     /*
     var canvas;
     var context;
@@ -65,10 +66,10 @@ window.onload = function () {
     window.addEventListener('devicemotion', rotationScroller, true); 
     window.addEventListener('scroll', highlight, true);
         /*var rotx = Math.floor(e.rotationRate.alpha);
-        var roty = Math.floor(e.rotationRate.beta);
-        var rotz = Math.floor(e.rotationRate.gamma);
+        var roty = Math.floor(e.rotationRate.beta);*/
+        var rotBeta;
  
-        rotValueX.innerHTML = "Alpha: " + rotx;
+        /*rotValueX.innerHTML = "Alpha: " + rotx;
         rotValueY.innerHTML = "Beta: " + roty;
         rotValueZ.innerHTML = "Gamma: " + rotz;*/
     
@@ -77,25 +78,27 @@ window.onload = function () {
         ay = Math.floor(-e.accelerationIncludingGravity.y);
         az = Math.floor(-e.accelerationIncludingGravity.z);
                 
-        if(ay > 1 && ay < 3){
+        rotBeta = Math.floor(e.rotationRate.beta);
+        
+        if(ay > 1 && ay < 3 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 8;
         	window.scrollTo(0, newScrollPoint);
         	
         }
-        if(ay < -3 && ay > -6){
+        if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 8;
         	window.scrollTo(0, newScrollPoint);
         	
         }
-        if(ay > 2 && ay < 5){
+        if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 15;
         	window.scrollTo(0, newScrollPoint);
         }
-        if(ay < -5 && ay > -8){
+        if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 15;
         	window.scrollTo(0, newScrollPoint);
         }
-        if(ay > 4){
+        if(ay > 4 && ax <= 4 && ax >= -3){
         	newScrollPoint = window.pageYOffset - 30;
         	window.scrollTo(0, newScrollPoint);
         	/*
@@ -104,7 +107,7 @@ window.onload = function () {
         	canvas.style.display = "inline";
         	*/
         }
-        if(ay < -7){
+        if(ay < -7 && ax <= 3 && ax >= -3){
         	newScrollPoint = window.pageYOffset + 30;
         	window.scrollTo(0, newScrollPoint);
         	
@@ -121,22 +124,25 @@ window.onload = function () {
         */
         
         
-        if(ax >= 6 && az <= -6 && selectionDialogVisible === 0){
-        	console.log("EKAIFFI");
+        if(ax >= 6 && az <= -6 && ay < 4 && ay > -4){
         	var elem = document.elementFromPoint(0, window.innerHeight/2);
-        	var body = document.getElementById("body");
+        	console.log(rotBeta);
         	
-    		if(elem.type == "button" && selectionDialogVisible === 0){
+    		if(elem.type == "button"){
     			var elementName = elem.textContent;
-            	alert("You have selected:\n" + elementName);
-            	console.log("ALERTTIIFFI");
+    			window.removeEventListener('devicemotion', rotationScroller, true); 
+            	var answer = confirm("You have selected:\n" + elementName);
+            	if(answer == true){
+            		window.addEventListener('devicemotion', rotationScroller, true);
+            	}
+            	else {
+            		window.addEventListener('devicemotion', rotationScroller, true);
+            	}
+            	
             }
-    		selectionDialogVisible = 1;
+    		
         }
-        else if(ax < 6 && az > -6 && selectionDialogVisible === 1){
-        	selectionDialogVisible = 0;
-        	console.log("LIPUNNOLLAUSIFFI");
-        }
+
     }
    
     function highlight(e){

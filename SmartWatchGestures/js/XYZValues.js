@@ -15,7 +15,6 @@ window.onload = function () {
     var textbox = document.querySelector('.contents');
     textbox.addEventListener("click", function(){
     	box = document.querySelector('#button1');
-    	
     });
     
     //dslakdla

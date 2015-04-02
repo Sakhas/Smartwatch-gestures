@@ -57,7 +57,7 @@ window.onload = function () {
         	window.scrollTo(0, newScrollPoint);
         }
         
-        if(ax >= 6 && az <= -6 && ay < 4 && ay > -4){
+        if(ax >= 6 && az <= -6 && ay <= 1  && ay >= -3){
         	var elem = document.elementFromPoint(0, window.innerHeight/2);
         	
     		if(elem.type == "submit"){

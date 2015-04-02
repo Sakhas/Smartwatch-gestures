@@ -89,21 +89,21 @@ window.onload = function () {
         rotBeta = Math.floor(e.rotationRate.beta);
         
         if(ay > 1 && ay < 3 && ax <= 4 && ax >= -3){
-        	newScrollPoint = window.pageYOffset - 8;
+        	newScrollPoint = window.pageYOffset - 4;
         	window.scrollTo(0, newScrollPoint);
         	
         }
         if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
-        	newScrollPoint = window.pageYOffset + 8;
+        	newScrollPoint = window.pageYOffset + 4;
         	window.scrollTo(0, newScrollPoint);
         	
         }
         if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
-        	newScrollPoint = window.pageYOffset - 15;
+        	newScrollPoint = window.pageYOffset - 12;
         	window.scrollTo(0, newScrollPoint);
         }
         if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
-        	newScrollPoint = window.pageYOffset + 15;
+        	newScrollPoint = window.pageYOffset + 12;
         	window.scrollTo(0, newScrollPoint);
         }
         if(ay > 4 && ax <= 4 && ax >= -3){
@@ -132,7 +132,7 @@ window.onload = function () {
         */
         
         
-        if(ax >= 6 && az <= -6 && ay < 4 && ay > -4){
+        if(ax >= 6 && az <= -6 && ay <= 1  && ay >= -3){
         	var elem = document.elementFromPoint(0, window.innerHeight/2);
         	console.log("rotBeta: " + rotBeta + " | ax: " + ax + " | az: " + az + " | ay: " + ay);
         	

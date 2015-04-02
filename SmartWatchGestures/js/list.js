@@ -10,6 +10,13 @@ window.onload = function () {
     });
 
     screen.lockOrientation("portrait");
+    
+    var lastScrollPoint = getUrlVars()["lastScrollPoint"];
+    
+    if(lastScrollPoint != null){
+    	window.scrollTo(0, parseInt(lastScrollPoint));
+    }
+    
     //tizen.power.request("SCREEN", "SCREEN_NORMAL");
     
     /*var listObjects = document.getElementById("listObjects");
@@ -38,6 +45,7 @@ window.onload = function () {
     var ay;
     var az;
     var newScrollPoint;
+    var passedScrollPoint;
     var oldHighlighted = null;
 
     /*
@@ -126,18 +134,13 @@ window.onload = function () {
         
         if(ax >= 6 && az <= -6 && ay < 4 && ay > -4){
         	var elem = document.elementFromPoint(0, window.innerHeight/2);
-        	console.log(rotBeta);
+        	console.log("rotBeta: " + rotBeta + " | ax: " + ax + " | az: " + az + " | ay: " + ay);
         	
     		if(elem.type == "button"){
     			var elementName = elem.textContent;
     			window.removeEventListener('devicemotion', rotationScroller, true); 
-            	var answer = confirm("You have selected:\n" + elementName);
-            	if(answer == true){
-            		window.addEventListener('devicemotion', rotationScroller, true);
-            	}
-            	else {
-            		window.addEventListener('devicemotion', rotationScroller, true);
-            	}
+    			passedScrollPoint = window.pageYOffset;
+            	selectionDone(elementName);
             	
             }
     		
@@ -160,5 +163,18 @@ window.onload = function () {
         		        	
         }
     
+    }
+    
+    function selectionDone(elementName){    	
+    	window.location = "ListObjectView.html?selectedObject=" + elementName + 
+    						"&passedScrollPoint=" + passedScrollPoint.toString();
+    }
+    
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
     }
 };

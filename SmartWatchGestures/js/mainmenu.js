@@ -72,7 +72,6 @@ window.onload = function () {
     
     function highlight(e){
     	var elem = document.elementFromPoint(0, window.innerHeight/2);
-    	console.log(elem.type);
 		if(elem.type == "submit"){
 
     		if(oldHighlighted != null && oldHighlighted != elem){

@@ -1,3 +1,11 @@
+var canvas;
+var context;
+var alphabet;
+
+
+var canvasTop;
+var canvasLeft;
+
 window.onload = function () {
 	
 
@@ -15,9 +23,33 @@ window.onload = function () {
     	window.scrollTo(0, parseInt(lastScrollPoint));
     }
     
+    canvas = document.createElement("CANVAS");
+    canvas.style.width = "150px";
+    canvas.style.height = "150px";
+    canvas.style.position = "fixed";
+    canvas.style.top = "50%";
+    canvas.style.left = "50%";
+    canvas.style.marginTop = "-75px";
+    canvas.style.marginLeft = "-75px";
+    canvas.style.zIndex = "1000";
+    canvas.style.border = "1px solid #ccc";
+    canvas.style.backgroundColor = "#E65800";
+    canvas.style.opacity = "0.7";
+    context = canvas.getContext("2d");
+    setContext("A");
+    document.body.appendChild(canvas);
+    canvas.style.display = "none";
+    
     window.addEventListener('devicemotion', rotationScroller, true); 
     window.addEventListener('scroll', highlight, true);
     
+}
+
+function setContext(alphabet){
+	context.font = "bold 90px Arial";
+    context.fillStyle = "white";
+    context.textAlign = "center";
+    context.fillText(alphabet, 150, 95);
 }
 //tizen.power.request("SCREEN", "SCREEN_NORMAL");
 
@@ -45,28 +77,16 @@ var newScrollPoint;
 var passedScrollPoint;
 var oldHighlighted = null;
 
-/*
-var canvas;
-var context;
-var alphabet;
-
-
-var canvasTop;
-var canvasLeft;
-
-canvas = document.createElement("CANVAS");
-canvas.style.width = "300px";
-canvas.style.height = "300px";
-canvas.style.position = "absolute";
-canvas.style.zIndex = "2";
-canvasLeft = (window.innerWidth/2).toString() + "px";
-canvas.style.top =  canvasLeft;
-context = canvas.getContext("2d");
-context.fillStyle = "#E65800";
-context.font = "bold 30px Arial";
-context.fillText("A", 25, 25);
-document.body.appendChild(canvas);
-canvas.style.display = "none";*/
+/* position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em; 
+    margin-left: -15em; 
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+*/
 
 
 /*var rotx = Math.floor(e.rotationRate.alpha);
@@ -103,29 +123,44 @@ function rotationScroller(e){
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay > 4 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 30;
-    	window.scrollTo(0, newScrollPoint);
-    	/*
-    	canvasTop = (window.innerHeight/2).toString() + "px";
-    	canvas.style.top =  canvasTop;
-    	canvas.style.display = "inline";
-    	*/
-    }
-    if(ay < -7 && ax <= 3 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 30;
+    	window.removeEventListener('scroll', highlight, true);
+    	newScrollPoint = window.pageYOffset - 40;
     	window.scrollTo(0, newScrollPoint);
     	
-    	/*
     	canvasTop = (window.innerHeight/2).toString() + "px";
-    	canvas.style.top =  canvasTop;
+    	
+    	var elem = document.elementFromPoint(0, window.innerHeight/2);
+    	console.log("ELEM ID" + elem.id);
+    	var elementName = elem.textContent;
+    	var alphabet = elementName.charAt(0);
+    	context.clearRect ( 0, 0, 300, 300);
+    	setContext(alphabet);
     	canvas.style.display = "inline";
-    	*/
+    	
     }
-    /*
-     else{
+    if(ay < -7 && ax <= 3 && ax >= -3){
+    	window.removeEventListener('scroll', highlight, true);
+    	newScrollPoint = window.pageYOffset + 40;
+    	window.scrollTo(0, newScrollPoint);
+    	
+    	
+    	canvasTop = (window.innerHeight/2).toString() + "px";
+    	
+    	var elem = document.elementFromPoint(0, window.innerHeight/2);
+    	var elementName = elem.textContent;
+    	var alphabet = elementName.charAt(0);
+    	context.clearRect ( 0, 0, 300, 300);
+    	setContext(alphabet);
+    	canvas.style.display = "inline";
+    	
+    }
+    if(ay >= -7 && ay <= 4){
+    	window.addEventListener('scroll', highlight, true);
     	canvas.style.display = "none";
     }
-    */
+    
+     
+    
     
     
     if(ax >= 6 && az <= -6 && ay <= 1  && ay >= -3){

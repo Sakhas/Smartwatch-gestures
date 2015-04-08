@@ -62,5 +62,10 @@ function rotationScroller(e){
     	newScrollPoint = window.pageYOffset + 30;
     	window.scrollTo(0, newScrollPoint);
     }
+    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+    	window.removeEventListener('devicemotion', rotationScroller, true);
+    	window.location.href = "index.html";
+    	
+    }
 }
 

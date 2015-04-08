@@ -21,6 +21,9 @@ window.onload = function () {
     
     if(lastScrollPoint != null){
     	window.scrollTo(0, parseInt(lastScrollPoint));
+    	window.setTimeout(function() {setEventListener();}, 649);
+    }else {
+    	window.setTimeout(function() {setEventListener();}, 150);
     }
     
     canvas = document.createElement("CANVAS");
@@ -40,9 +43,14 @@ window.onload = function () {
     document.body.appendChild(canvas);
     canvas.style.display = "none";
     
-    window.addEventListener('devicemotion', rotationScroller, true); 
+    //window.addEventListener('devicemotion', rotationScroller, true); 
+    
     window.addEventListener('scroll', highlight, true);
     
+}
+
+function setEventListener() {
+	window.addEventListener('devicemotion', rotationScroller, true);
 }
 
 function setContext(alphabet){
@@ -163,7 +171,7 @@ function rotationScroller(e){
     
     
     
-    if(ax >= 6 && az <= -6 && ay <= 1  && ay >= -3){
+    if(ax >= 5 && az <= -5 && ay <= 1  && ay >= -3){
     	var elem = document.elementFromPoint(0, window.innerHeight/2);
     	console.log("rotBeta: " + rotBeta + " | ax: " + ax + " | az: " + az + " | ay: " + ay);
     	
@@ -175,6 +183,11 @@ function rotationScroller(e){
             	
         }
     		
+    }
+    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+    	window.removeEventListener('devicemotion', rotationScroller, true);
+    	window.location.href = "index.html";
+    	
     }
 
 }

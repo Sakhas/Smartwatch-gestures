@@ -12,10 +12,25 @@ window.onload = function () {
     selectedObjectName = selectedObjectName.replace("%20", ' ');
     selectedObject.innerHTML = selectedObjectName;
     
+    window.addEventListener('devicemotion', rotationScroller, true);
+    
     
 
 }
 
+function rotationScroller(e){
+	ax = Math.floor(e.accelerationIncludingGravity.x);
+    ay = Math.floor(-e.accelerationIncludingGravity.y);
+    az = Math.floor(-e.accelerationIncludingGravity.z);
+    
+    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+    	passedScrollPoint = getUrlVars()["passedScrollPoint"];
+    	window.removeEventListener('devicemotion', rotationScroller, true);
+    	window.location = "List.html?lastScrollPoint=" + passedScrollPoint;
+    	
+    }
+    
+}
 
 function getUrlVars() {
     var vars = {};

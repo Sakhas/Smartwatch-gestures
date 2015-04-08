@@ -51,5 +51,11 @@ window.onload = function () {
         rotValueY.innerHTML = "Beta: " + roty;
         rotValueZ.innerHTML = "Gamma: " + rotz;
         
+        if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+        	window.removeEventListener('devicemotion', rotationScroller, true);
+        	window.location.href = "index.html";
+        	
+        }
+        
     });
 };

@@ -6,7 +6,7 @@ window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if(e.keyName == "back")
-        	window.location.href = "index.html";;
+        	window.location.href = "index.html";
     });
 
     screen.lockOrientation("portrait");
@@ -59,7 +59,7 @@ function rotationScroller(e){
     	window.scrollTo(0, newScrollPoint);
     }
     
-    if(ax >= 6 && az <= -6 && ay <= 1  && ay >= -3){
+    if(ax >= 5 && az <= -5 && ay <= 1  && ay >= -3){
     	var elem = document.elementFromPoint(0, window.innerHeight/2);
     	
 		if(elem.type == "submit"){
@@ -70,6 +70,10 @@ function rotationScroller(e){
         }
 		
     }
+    /*if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+    	window.location.href = "index.html";
+    	
+    }*/
 }
 
 function highlight(e){

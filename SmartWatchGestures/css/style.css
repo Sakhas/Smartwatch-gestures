@@ -5,6 +5,7 @@
 body {
     margin: 0px auto;
     background-color:white;
+    
 }
 
 .contents {
@@ -13,6 +14,7 @@ body {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	height:320px;
+	
 }
 
 
@@ -39,5 +41,6 @@ button{
 	width:100%;
 	z-index:2;
 }
+
 
 

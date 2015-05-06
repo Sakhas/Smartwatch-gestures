@@ -31,6 +31,7 @@ button{
 	background-color:#404040;
 	width:100%;
 	z-index:1;
+	padding: 1em 0.2em 1em 0.2em;
 }
 
 .listObject{
@@ -40,6 +41,10 @@ button{
 	background-color:#404040;
 	width:100%;
 	z-index:2;
+}
+
+#phonebookButton {
+	padding: 0em 0em 0em 0em;
 }
 
 

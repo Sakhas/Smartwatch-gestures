@@ -6,6 +6,12 @@ var alphabet;
 var canvasTop;
 var canvasLeft;
 
+var vittu = false;
+var revertedScrolling = false;
+var scrollSpeed = 0;
+var scrollUp = false;
+var scrollDown = false;
+
 window.onload = function () {
 	
 
@@ -44,10 +50,28 @@ window.onload = function () {
     canvas.style.display = "none";
     
     //window.addEventListener('devicemotion', rotationScroller, true); 
-    
-    window.addEventListener('scroll', highlight, true);
+    var confCookie = readCookie('reverted');
+    if(confCookie){
+    	if(confCookie == "on"){
+    		revertedScrolling = true;
+    	}
+    }
+
     
 }
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+
 
 function setEventListener() {
 	window.addEventListener('devicemotion', rotationScroller, true);
@@ -105,34 +129,65 @@ var rotBeta;
 rotValueY.innerHTML = "Beta: " + roty;
 rotValueZ.innerHTML = "Gamma: " + rotz;*/
 
+
 function rotationScroller(e){
+	
 	ax = Math.floor(e.accelerationIncludingGravity.x);
     ay = Math.floor(-e.accelerationIncludingGravity.y);
     az = Math.floor(-e.accelerationIncludingGravity.z);
             
     rotBeta = Math.floor(e.rotationRate.beta);
     
+    
+
     if(ay > 1 && ay < 3 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 4;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 4;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 4;
+    	}
     	window.scrollTo(0, newScrollPoint);
+    	vittu = true;
     	
     }
     if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 4;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 4;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 4;
+    	}
     	window.scrollTo(0, newScrollPoint);
+    	vittu = true;
     	
     }
     if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 12;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 12;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 12;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 12;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 12;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 12;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay > 4 && ax <= 4 && ax >= -3){
     	window.removeEventListener('scroll', highlight, true);
-    	newScrollPoint = window.pageYOffset - 40;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 40;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 40;
+    	}
     	window.scrollTo(0, newScrollPoint);
     	
     	canvasTop = (window.innerHeight/2).toString() + "px";
@@ -146,9 +201,15 @@ function rotationScroller(e){
     	canvas.style.display = "inline";
     	
     }
+    
     if(ay < -7 && ax <= 3 && ax >= -3){
     	window.removeEventListener('scroll', highlight, true);
-    	newScrollPoint = window.pageYOffset + 40;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 40;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 40;
+    	}
     	window.scrollTo(0, newScrollPoint);
     	
     	
@@ -184,9 +245,14 @@ function rotationScroller(e){
         }
     		
     }
-    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3){
+    
+
+    
+    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3 && vittu){
     	window.removeEventListener('devicemotion', rotationScroller, true);
     	window.location.href = "index.html";
+    	console.log("VITTU");
+    	console.log("AX: " + ax + "AY: " + ay +  "AZ: " + az);
     	
     }
 
@@ -221,4 +287,114 @@ function getUrlVars() {
     });
     return vars;
 }
+
+function scrollWindowUpLevel1() {
+	newScrollPoint = window.pageYOffset - 4;
+	window.scrollTo(0, newScrollPoint);
+}
+function scrollWindowUpLevel2() {
+	newScrollPoint = window.pageYOffset - 12;
+	window.scrollTo(0, newScrollPoint);
+}
+function scrollWindowUpLevel3() {
+	newScrollPoint = window.pageYOffset - 40;
+	window.scrollTo(0, newScrollPoint);
+}
+function scrollWindowDownLevel1() {
+	newScrollPoint = window.pageYOffset + 4;
+	window.scrollTo(0, newScrollPoint);
+}
+function scrollWindowDownLevel2() {
+	newScrollPoint = window.pageYOffset + 12;
+	window.scrollTo(0, newScrollPoint);
+}
+function scrollWindowDownLevel3() {
+	newScrollPoint = window.pageYOffset + 40;
+	window.scrollTo(0, newScrollPoint);
+}
+
+/*
+if(flickScrolling){
+	if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
+		if(revertedScrolling){
+			if(scrollUp){
+				scrollUp = false;
+				scrollSpeed = 0;
+			}
+			else {
+    			scrollDown = true;
+    			if(scrollSpeed < 3){
+    				scrollSpeed++;
+    			}
+			}
+		}
+		else {
+			if(scrollDown){
+				scrollDown = false;
+				scrollSpeed = 0;
+			}
+			else {
+    			scrollUp = true;
+    			if(scrollSpeed < 3){
+    				scrollSpeed++;
+    			}
+			}
+		}
+	}
+	if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
+		if(revertedScrolling){
+			if(scrollDown){
+				scrollDown = false;
+				scrollSpeed = 0;
+			}
+			else{
+    			scrollUp = true;
+    			if(scrollSpeed < 3){
+    				scrollSpeed++;
+    			}
+			}
+		}
+		else {
+			if(scrollUp){
+				scrollUp = false;
+				scrollSpeed = 0;
+			}
+			else {
+    			scrollDown = true;
+    			if(scrollSpeed < 3){
+    				scrollSpeed++;
+    			}
+			}
+		}
+	}
+	
+}
+function flickScroller(){
+	if(scrollUp){
+		if(scrollSpeed == 1){
+			scrollWindowUpLevel1();
+		}
+		else if(scrollSpeed == 2){
+			scrollWindowUpLevel2();
+		}
+		else if(scrollSpeed == 3){
+			scrollWindowUpLevel3();
+		}
+	}
+	else if(scrollDown){
+		if(scrollSpeed == 1){
+			scrollWindowDownLevel1();
+		}
+		else if(scrollSpeed == 2){
+			scrollWindowDownLevel2();
+		}
+		else if(scrollSpeed == 3){
+			scrollWindowDownLevel3();
+		}
+	}
+}
+    window.addEventListener('scroll', highlight, true);
+    if(flickScrolling){
+    	setInterval(flickScroller, 50);
+    }*/
 

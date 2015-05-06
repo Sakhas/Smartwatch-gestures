@@ -1,8 +1,8 @@
-//testing testing
+
+var revertedScrolling = false;
 
 window.onload = function () {
 	
-
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
         if(e.keyName == "back")
@@ -14,7 +14,26 @@ window.onload = function () {
     window.addEventListener('devicemotion', rotationScroller, true); 
     window.addEventListener('scroll', highlight, true);
     
+    var confCookie = readCookie('reverted');
+    if(confCookie){
+    	console.log(confCookie);
+    	if(confCookie === "on"){
+    		revertedScrolling = true;
+    	}
+    }
 }
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 var accValueX = document.querySelector('#accValueX');
 var accValueY = document.querySelector('#accValueY');
 var accValueZ = document.querySelector('#accValueZ');
@@ -33,29 +52,59 @@ function rotationScroller(e){
     az = Math.floor(-e.accelerationIncludingGravity.z);
             
     if(ay > 1 && ay < 3 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 4;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 4;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 4;
+    	}
     	window.scrollTo(0, newScrollPoint);
     	
     }
     if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 4;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 4;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 4;
+    	}
     	window.scrollTo(0, newScrollPoint);
     	
     }
     if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 9;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 9;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 9;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 9;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 9;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 9;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay > 4 && ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset - 20;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset + 20;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset - 20;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     if(ay < -7&& ax <= 4 && ax >= -3){
-    	newScrollPoint = window.pageYOffset + 20;
+    	if(revertedScrolling){
+    		newScrollPoint = window.pageYOffset - 20;
+    	}
+    	else {
+    		newScrollPoint = window.pageYOffset + 20;
+    	}
     	window.scrollTo(0, newScrollPoint);
     }
     
@@ -63,6 +112,7 @@ function rotationScroller(e){
     	var elem = document.elementFromPoint(0, window.innerHeight/2);
     	
 		if(elem.type == "submit"){
+			
 			window.removeEventListener('devicemotion', rotationScroller, true);   	
         	window.location.href = elem.id.toString() + ".html";
         	
@@ -89,5 +139,13 @@ function highlight(e){
     		        	
     }
 
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }
 

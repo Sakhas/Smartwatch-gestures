@@ -6,7 +6,7 @@ var alphabet;
 var canvasTop;
 var canvasLeft;
 
-var vittu = false;
+var condition = false;
 var revertedScrolling = false;
 var scrollSpeed = 0;
 var scrollUp = false;
@@ -83,23 +83,7 @@ function setContext(alphabet){
     context.textAlign = "center";
     context.fillText(alphabet, 150, 95);
 }
-//tizen.power.request("SCREEN", "SCREEN_NORMAL");
 
-/*var listObjects = document.getElementById("listObjects");
-var tableBody = document.createElement("TBODY");
-listObjects.appendChild(tableBody);
-for(var i=0; i<26; i++){
-	var row = listObjects.insertRow(i);
-	var button = document.createElement("BUTTON");
-	button.id = i.toString();
-	var bText = document.createTextNode("Object" + i.toString());
-	button.appendChild(bText);
-	
-	var tr = document.createElement("TR");
-	tableBody.appendChild(tr);
-	var td = document.createElement("TD");
-	td.appendChild(button);
-	tr.appendChild(td);*/
 
 
 var ax;
@@ -109,25 +93,10 @@ var newScrollPoint;
 var passedScrollPoint;
 var oldHighlighted = null;
 
-/* position:fixed;
-    top: 50%;
-    left: 50%;
-    width:30em;
-    height:18em;
-    margin-top: -9em; 
-    margin-left: -15em; 
-    border: 1px solid #ccc;
-    background-color: #f3f3f3;
-*/
-
 
 /*var rotx = Math.floor(e.rotationRate.alpha);
 var roty = Math.floor(e.rotationRate.beta);*/
 var rotBeta;
- 
-/*rotValueX.innerHTML = "Alpha: " + rotx;
-rotValueY.innerHTML = "Beta: " + roty;
-rotValueZ.innerHTML = "Gamma: " + rotz;*/
 
 
 function rotationScroller(e){
@@ -148,7 +117,7 @@ function rotationScroller(e){
     		newScrollPoint = window.pageYOffset - 4;
     	}
     	window.scrollTo(0, newScrollPoint);
-    	vittu = true;
+    	condition = true;
     	
     }
     if(ay < -3 && ay > -6 && ax <= 4 && ax >= -3){
@@ -159,7 +128,7 @@ function rotationScroller(e){
     		newScrollPoint = window.pageYOffset + 4;
     	}
     	window.scrollTo(0, newScrollPoint);
-    	vittu = true;
+    	condition = true;
     	
     }
     if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
@@ -248,10 +217,10 @@ function rotationScroller(e){
     
 
     
-    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3 && vittu){
+    if(ax <= -5 && az <= -7 && ay <= 1  && ay >= -3 && condition){
     	window.removeEventListener('devicemotion', rotationScroller, true);
     	window.location.href = "index.html";
-    	console.log("VITTU");
+    	console.log("condition");
     	console.log("AX: " + ax + "AY: " + ay +  "AZ: " + az);
     	
     }
@@ -313,88 +282,4 @@ function scrollWindowDownLevel3() {
 	window.scrollTo(0, newScrollPoint);
 }
 
-/*
-if(flickScrolling){
-	if(ay > 2 && ay < 5 && ax <= 4 && ax >= -3){
-		if(revertedScrolling){
-			if(scrollUp){
-				scrollUp = false;
-				scrollSpeed = 0;
-			}
-			else {
-    			scrollDown = true;
-    			if(scrollSpeed < 3){
-    				scrollSpeed++;
-    			}
-			}
-		}
-		else {
-			if(scrollDown){
-				scrollDown = false;
-				scrollSpeed = 0;
-			}
-			else {
-    			scrollUp = true;
-    			if(scrollSpeed < 3){
-    				scrollSpeed++;
-    			}
-			}
-		}
-	}
-	if(ay < -5 && ay > -8 && ax <= 4 && ax >= -3){
-		if(revertedScrolling){
-			if(scrollDown){
-				scrollDown = false;
-				scrollSpeed = 0;
-			}
-			else{
-    			scrollUp = true;
-    			if(scrollSpeed < 3){
-    				scrollSpeed++;
-    			}
-			}
-		}
-		else {
-			if(scrollUp){
-				scrollUp = false;
-				scrollSpeed = 0;
-			}
-			else {
-    			scrollDown = true;
-    			if(scrollSpeed < 3){
-    				scrollSpeed++;
-    			}
-			}
-		}
-	}
-	
-}
-function flickScroller(){
-	if(scrollUp){
-		if(scrollSpeed == 1){
-			scrollWindowUpLevel1();
-		}
-		else if(scrollSpeed == 2){
-			scrollWindowUpLevel2();
-		}
-		else if(scrollSpeed == 3){
-			scrollWindowUpLevel3();
-		}
-	}
-	else if(scrollDown){
-		if(scrollSpeed == 1){
-			scrollWindowDownLevel1();
-		}
-		else if(scrollSpeed == 2){
-			scrollWindowDownLevel2();
-		}
-		else if(scrollSpeed == 3){
-			scrollWindowDownLevel3();
-		}
-	}
-}
-    window.addEventListener('scroll', highlight, true);
-    if(flickScrolling){
-    	setInterval(flickScroller, 50);
-    }*/
 
